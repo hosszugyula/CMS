@@ -26,5 +26,3 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - name: Run the Gradle package task
-      run: ./gradlew -b ci.gradle package
