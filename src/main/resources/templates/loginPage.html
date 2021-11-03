@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <style th:inline="css">
+        body {
+            background: #D1D1D1;
+            align-items: center;
+        }
+        li {
+          list-style-type: none;
+        }
+        form {
+        height: 300px;
+        }
+        input[type=text], input[type=password], input[type=submit] {
+            display: grid;;
+            text-align: center;
+            align-items: center;
+            margin: 40px;
+        }
+    </style>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+
+<h1>Bejelentkezés</h1>
+
+<!-- /login?error=true -->
+<div th:if="${#request.getParameter('error') == 'true'}"
+     style="color:red;margin:10px 0px;">
+    Login Failed!!!<br />
+    Reason :
+    <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+          th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+                Static summary
+         </span>
+
+</div>
+
+<h3>Enter user name and password:</h3>
+<form name='f' th:action="@{/j_spring_security_check}" method='POST'>
+    <div class="container">
+    <label for="username"><b>Felhasználónév:</b></label>
+    <input type="text" placeholder="Add meg a felhasználóneved" name="username" value='' required>
+
+    <label for="password"><b>Jelszó:</b></label>
+    <input type="password" placeholder="Add meg a jelszavadat" name="password" value='' required>
+
+    <input type="submit" name="submit" value="Bejelentkezés" /></td>
+    </div>
+</form>
+
+<ul>
+    <li>dbuser1/123</li>
+    <li>dbadmin1/123</li>
+</ul>
+
+</body>
+
+</html>

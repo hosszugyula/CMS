@@ -1,0 +1,39 @@
+<head xmlns:th="http://www.w3.org/1999/xhtml">
+    <style th:inline="css">
+        .navbar {
+        height: 80px;
+        font-size: 15pt;
+        display: grid;
+        background-color: #212121;
+        align-items: center;
+        text-align: right
+        }
+
+        .navbar a {
+            color: white;
+            margin: 12px;
+            text-decoration: none;
+        }
+
+        $nbsp {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar" xmlns:th="http://www.thymeleaf.org">
+    <div class="list-items">
+    <a th:href="@{/}">Kezdőlap</a>
+
+    <a>Személyek</a>   <!--- Ez még nincs elkészítve --->
+
+    <a>Hirdetések</a>   <!--- Ez még nincs elkészítve --->
+
+    <a th:href="@{/userInfo}">Rólad/Login</a>  <!--- ez lehetne a személyes infók oldal(userInfoPage) -->
+
+    <a th:href="@{/admin}">Adminfül</a>    <!-- Ide mehet majd a személyek listázása stb.-->
+
+    <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Kijelentkezés</a>
+    </div>
+</div>
+</body>
