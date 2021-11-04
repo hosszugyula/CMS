@@ -1,10 +1,14 @@
 package com.example.CMS.controller;
 
+import com.example.CMS.model.JobAdvertisement;
+import com.example.CMS.service.JobAdvertisementService;
 import com.example.CMS.utils.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,7 +17,14 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
-    @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
+    private JobAdvertisementService jobAdvertisementService;
+
+    @Autowired
+    public void setJobAdvertisementService(JobAdvertisementService jobAdvertisementService) {
+        this.jobAdvertisementService = jobAdvertisementService;
+    }
+
+    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcomePage(Model model) {
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "Ez egy jelöltkezelő rendszer lesz");
@@ -79,6 +90,20 @@ public class MainController {
         }
 
         return "403Page";
+    }
+
+    @RequestMapping(value = "/jobs/{id}")
+    public String jobPage(@PathVariable(value = "id") Long id, Model model) throws Exception {
+
+        JobAdvertisement jA =jobAdvertisementService.getJobAdvertisementById(id);
+        //TODO 404 or error page
+        if(jA == null){
+            throw  new Exception("Nincs ilyen id-val hírdetés");
+        }
+
+        model.addAttribute("jobAdvertisement",jA );
+
+        return "jobAdvertisement/jobAdvertisementPage.html";
     }
 
 }
