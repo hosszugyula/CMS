@@ -15,7 +15,7 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
-    @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcomePage(Model model) {
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "Ez egy jelöltkezelő rendszer lesz");
@@ -84,9 +84,11 @@ public class MainController {
     }
 
     @RequestMapping(value = "/jobs/{id}")
-    public String jobPage(@PathVariable(value = "id") String id,Model model){
+    public String jobPage(@PathVariable(value = "id") Long id, Model model)  {
 
-        model.addAttribute("jobAdvertisement", new JobAdvertisement("XYZXYZ","XYZ KFT","Állás rövid leírása belülről"));
+
+
+        model.addAttribute("jobAdvertisement", new JobAdvertisement("XYZXYZ", "XYZ KFT", "Állás rövid leírása belülről"));
 
         return "jobAdvertisement/jobAdvertisementPage.html";
     }
