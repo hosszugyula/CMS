@@ -12,6 +12,7 @@ import java.util.List;
 @Transactional
 public class AppRoleDAO extends JdbcDaoSupport {
 
+
     @Autowired
     public AppRoleDAO(DataSource dataSource) {
         this.setDataSource(dataSource);
