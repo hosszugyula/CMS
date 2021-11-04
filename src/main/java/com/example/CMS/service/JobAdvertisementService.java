@@ -1,6 +1,6 @@
 package com.example.CMS.service;
 
-import com.example.CMS.Repository.JobAdvertismentRepository;
+import com.example.CMS.repository.JobAdvertisementRepository;
 import com.example.CMS.model.JobAdvertisement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,15 +11,15 @@ import java.util.Optional;
 public class JobAdvertisementService {
 
 
-    private JobAdvertismentRepository jobAdvertismentRepo;
+    private JobAdvertisementRepository jobAdvertisementRepo;
 
     @Autowired
-    public void setJobAdvertismentRepo(JobAdvertismentRepository jobAdvertismentRepo) {
-        this.jobAdvertismentRepo = jobAdvertismentRepo;
+    public void setJobAdvertisementRepo(JobAdvertisementRepository jobAdvertisementRepo) {
+        this.jobAdvertisementRepo = jobAdvertisementRepo;
     }
 
     public JobAdvertisement getJobAdvertisementById(long id){
-        Optional<JobAdvertisement> jA = jobAdvertismentRepo.findById(id);
+        Optional<JobAdvertisement> jA = jobAdvertisementRepo.findById(id);
 
         if(jA.isEmpty()){
             return null;
