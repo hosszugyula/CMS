@@ -1,10 +1,12 @@
 package com.example.CMS.controller;
 
+import com.example.CMS.model.JobAdvertisement;
 import com.example.CMS.utils.WebUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -79,6 +81,14 @@ public class MainController {
         }
 
         return "403Page";
+    }
+
+    @RequestMapping(value = "/jobs/{id}")
+    public String jobPage(@PathVariable(value = "id") String id,Model model){
+
+        model.addAttribute("jobAdvertisement", new JobAdvertisement("XYZXYZ","XYZ KFT","Állás rövid leírása belülről"));
+
+        return "jobAdvertisement/jobAdvertisementPage.html";
     }
 
 }
