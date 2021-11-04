@@ -3,6 +3,7 @@ package com.example.CMS.service;
 import com.example.CMS.dao.AppRoleDAO;
 import com.example.CMS.dao.AppUserDAO;
 import com.example.CMS.model.AppUser;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,13 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private AppUserDAO appUserDAO;
+    private final AppUserDAO appUserDAO;
 
-    @Autowired
-    private AppRoleDAO appRoleDAO;
+    private final AppRoleDAO appRoleDAO;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
