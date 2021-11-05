@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -90,6 +91,17 @@ public class MainController {
         }
 
         return "403Page";
+    }
+
+
+    @RequestMapping(value = "/jobs")
+    public String listOfJobsPage(Model model) {
+
+        List<JobAdvertisement> jobAdvertisementList = jobAdvertisementService.jobAdvertisements();
+
+        model.addAttribute("jobAdvertisementList",jobAdvertisementList );
+
+        return "jobAdvertisement/jobAdvertisements.html";
     }
 
     @RequestMapping(value = "/jobs/{id}")

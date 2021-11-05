@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section th:each="job : ${jobAdvertisementList}">
+<h1 th:text="${job.Scope}">Munkakör XYZXYZ</h1>
+<h2 th:text="${job.Forwarder}">XYZ KFT</h2>
+    <a th:href="@{/jobs/{id}(id=${job.id})}">Link</a>
+
+
+</section>
+
+</body>
+</html>
