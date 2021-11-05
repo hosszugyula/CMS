@@ -3,21 +3,32 @@
 <head>
     <title th:utext="${title}"></title>
     <style th:inline="css">
-        body {
-            background: #D1D1D1;
-            display: grid;
-            align-items: center;
-            text-align: center;
-        }
+        body { font-family:Arial, sans-serif;}
+        .container {display: grid; grid-template-columns: repeat(2,1fr);}
+        .message {margin-top: 180px; margin-left: 150px; }
+        h3 { font-size: 25px; }
+        .message ul {align-content: center;}
+        .message li { font-size: 19px; list-style: none; margin: 30px;}
     </style>
 </head>
 
-<body>
+<body th:style="'background:url('+ @{/img/hiring.jpg} +');'">
 
 <!-- Include _menu.html -->
 <th:block th:include="/_menu"></th:block>
 
-<h2>Message : <span th:utext="${message}"></span></h2>
+<div class="container">
+    <div class="empty">
+    </div>
+    <div class="message">
+        <ul>
+            <li><h3>Ez egy jelöltkezelő rendszer</h3></li>
+            <li>Álláshirdetések között tudsz böngészni</li>
+            <li>Álláshirdetésekre tudsz jelentkezni</li>
+            <li>Egyszerű de nagyszerű</li>
+        </ul>
+    </div>
+</div>
 
 </body>
 </html>
