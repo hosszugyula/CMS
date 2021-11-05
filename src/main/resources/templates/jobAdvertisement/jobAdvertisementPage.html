@@ -5,13 +5,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style th:inline="css">
+    body {background: #D1D1D1; text-align: center; font-family:Arial, sans-serif}
+    .tg  {width: 500px; margin-top: 50px;border-collapse:collapse;border-spacing:0; margin-left:auto;margin-right:auto;}
+    .tg td{background: #839192;border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:8px 8px;word-break:normal;}
+    .tg th{background: #212121;border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    font-weight:normal;overflow:hidden;padding:8px 8px;word-break:normal; color: #FDFEFE }
+    .tg .column2{border-color:black;text-align:center;vertical-align:top}
+    .tg .column{border-color:black;text-align:center;vertical-align:top}
+    .tg .job{text-align:left;vertical-align:center}
+    </style>
 </head>
 <body>
-<h1 th:text="${jobAdvertisement.Scope}">Munkakör XYZXYZ</h1>
-<h2 th:text="${jobAdvertisement.Forwarder}">XYZ KFT</h2>
-<section th:text="${jobAdvertisement.content}">
-    <p>Állás rövid leírása</p>
-</section>
+<th:block th:include="/_menu"></th:block>
 
+<h1>Job XYZ</h1>
+<table class="tg">
+    <thead>
+    <tr>
+        <th class="column">Munkakör XYZXYZ</th>
+        <th class="column">XYZ KFT</th>
+        <th class="column2">Állás rövid leírása</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="job" th:text="${jobAdvertisement.Scope}"></td>
+        <td class="job" th:text="${jobAdvertisement.Forwarder}"></td>
+        <td class="job" th:text="${jobAdvertisement.content}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

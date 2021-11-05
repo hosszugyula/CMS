@@ -5,15 +5,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style th:inline="css">
+    body {background: #D1D1D1; text-align: center; font-family:Arial, sans-serif}
+    .tg  {width: 500px; margin-top: 50px;border-collapse:collapse;border-spacing:0; margin-left:auto;margin-right:auto;}
+    .tg td{background: #839192;border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:8px 8px;word-break:normal;}
+    .tg th{background: #212121;border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    font-weight:normal;overflow:hidden;padding:8px 8px;word-break:normal; color: #FDFEFE }
+    .tg .column2{border-color:black;text-align:center;vertical-align:top}
+    .tg .column{border-color:black;text-align:center;vertical-align:top}
+    .tg .job{text-align:left;vertical-align:center}
+    </style>
 </head>
 <body>
-<section th:each="job : ${jobAdvertisementList}">
-<h1 th:text="${job.Scope}">Munkakör XYZXYZ</h1>
-<h2 th:text="${job.Forwarder}">XYZ KFT</h2>
-    <a th:href="@{/jobs/{id}(id=${job.id})}">Link</a>
 
+<th:block th:include="/_menu"></th:block>
 
-</section>
+<h1>List of Advertisements</h1>
+<table class="tg">
+    <thead>
+    <tr>
+        <th class="column">Munkakör XYZXYZ</th>
+        <th class="column">XYZ KFT</th>
+        <th class="column2"> Részletek </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="job : ${jobAdvertisementList}">
+        <td class="job" th:text="${job.Scope}"></td>
+        <td class="job" th:text="${job.Forwarder}"></td>
+        <td class="job" th:href="@{/jobs/{id}(id=${job.id})}"><a th:href="@{/jobs/{id}(id=${job.id})}">Link</a></td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

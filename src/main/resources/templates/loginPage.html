@@ -3,54 +3,47 @@
 <head>
     <title>Login</title>
     <style th:inline="css">
-        body {
-            background: #D1D1D1;
-            align-items: center;
-        }
-        li {
-          list-style-type: none;
-        }
-        form {
-        height: 300px;
-        }
-        input[type=text], input[type=password], input[type=submit] {
-            display: grid;;
-            text-align: center;
-            align-items: center;
-            margin: 40px;
-        }
+        body { margin: 0; padding: 0; background-color:#6abadeba; font-family: 'Arial', sans-serif; }
+        .login{ width: 382px;overflow: hidden;margin: auto;margin: 20 0 0 450px;padding: 80px;background: #23463f;border-radius: 15px; }
+        h2{ text-align: center;color: #277582;padding: 20px; }
+        label{ color: #08ffd1;font-size: 17px; }
+        #Uname{ width: 300px;height: 30px;border: none;border-radius: 3px;padding-left: 8px; }
+        #Pass{ width: 300px; height: 30px; border: none; border-radius: 3px; padding-left: 8px; }
+        #log{ width: 300px;height: 30px;border: none;border-radius: 17px;padding-left: 7px;color: blue; }
     </style>
 </head>
 <body>
 <!-- Include _menu.html -->
 <th:block th:include="/_menu"></th:block>
 
-<h1>Bejelentkezés</h1>
-
-<!-- /login?error=true -->
-<div th:if="${#request.getParameter('error') == 'true'}"
-     style="color:red;margin:10px 0px;">
-    Login Failed!!!<br />
-    Reason :
-    <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
-          th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+<h2>Bejelentkezés</h2><br>
+<div class="login">
+    <!-- /login?error=true -->
+    <div th:if="${#request.getParameter('error') == 'true'}"
+         style="color:red;margin:10px 0px">
+        Login Failed!!!<br />
+        Reason :
+        <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+              th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
                 Static summary
          </span>
-
-</div>
-
-<h3>Enter user name and password:</h3>
-<form name='f' th:action="@{/j_spring_security_check}" method='POST'>
-    <div class="container">
-    <label for="username"><b>Felhasználónév:</b></label>
-    <input type="text" placeholder="Add meg a felhasználóneved" name="username" value='' required>
-
-    <label for="password"><b>Jelszó:</b></label>
-    <input type="password" placeholder="Add meg a jelszavadat" name="password" value='' required>
-
-    <input type="submit" name="submit" value="Bejelentkezés" /></td>
     </div>
-</form>
+    <form id="login" name='f' th:action="@{/j_spring_security_check}" method='POST'>
+        <label><b>Felhasználónév
+        <br><br>
+        </b>
+        </label>
+        <input type="text" name="username" id="Uname" placeholder="Username" value='' required>
+        <br><br>
+        <label><b>Jelszó
+        <br><br>
+        </b>
+        </label>
+        <input type="Password" name="password" id="Pass" placeholder="Password" value='' required>
+        <br><br>
+        <input type="submit" name="submit" id="log" value="Bejelentkezés">
+    </form>
+</div>
 
 <ul>
     <li>dbuser1/123</li>
