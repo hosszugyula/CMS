@@ -96,6 +96,7 @@ public class MainController {
     @RequestMapping(value = "/jobs")
     public String listOfJobsPage(Model model) {
 
+
         List<JobAdvertisement> jobAdvertisementList = jobAdvertisementService.jobAdvertisements();
 
         model.addAttribute("jobAdvertisementList",jobAdvertisementList );
