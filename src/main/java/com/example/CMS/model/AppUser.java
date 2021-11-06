@@ -4,7 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,9 +24,10 @@ public class AppUser {
 
     private String userName;
     private String encryptedPassword;
+    private AppUserDetails details;
 
     @ElementCollection
-    private List<String> roleNames;
+    private List<String> roleNames = new ArrayList<>();
 
     @Override
     public String toString() {
