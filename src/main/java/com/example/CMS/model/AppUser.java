@@ -4,18 +4,30 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppUser {
 
-    private Long userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String userName;
-    private String encrytedPassword;
+    private String encryptedPassword;
+    private AppUserDetails details;
+
+    @ElementCollection(fetch=FetchType.EAGER)
+    private List<String> roleNames = new ArrayList<>();
 
     @Override
     public String toString() {
-        return this.userName + "/" + this.encrytedPassword;
+        return this.userName + "/" + this.encryptedPassword;
     }
 
 }

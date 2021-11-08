@@ -3,7 +3,6 @@ package com.example.CMS.service;
 import com.example.CMS.repository.JobAdvertisementRepository;
 import com.example.CMS.model.JobAdvertisement;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
