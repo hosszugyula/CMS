@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,11 @@ public class AppUser {
 
     private String userName;
     private String encryptedPassword;
-    private AppUserDetails details;
+    private String first_name;                      //ha ezek az AppUserDetailsben vannak akkor nem tudom listázni
+    private String sur_name;
+    private String introduction;
+    private LocalDate birth_date;
+    //private AppUserDetails details;
 
     @ElementCollection(fetch=FetchType.EAGER)
     private List<String> roleNames = new ArrayList<>();

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style th:inline="css">
+    body {background: #D1D1D1; text-align: center; font-family:Arial, sans-serif}
+    .tg  {width: 500px; margin-top: 50px;border-collapse:collapse;border-spacing:0; margin-left:auto;margin-right:auto;}
+    .tg td{background: #839192;border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:8px 8px;word-break:normal;}
+    .tg th{background: #212121;border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    font-weight:normal;overflow:hidden;padding:8px 8px;word-break:normal; color: #FDFEFE }
+    .tg .column2{border-color:black;text-align:center;vertical-align:top}
+    .tg .column{border-color:black;text-align:center;vertical-align:top}
+    .tg .job{text-align:left;vertical-align:center}
+    </style>
+</head>
+<body>
+<th:block th:include="/_menu"></th:block>
+
+<h1>User XYZ</h1>
+<table class="tg">
+    <thead>
+    <tr>
+        <th class="column">Vezetéknév</th>
+        <th class="column">Keresztnév</th>
+        <th class="column">Születési Dátum</th>
+        <th class="column">Leírás</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="user" th:text="${appUser.first_name}"></td>
+        <td class="user" th:text="${appUser.sur_name}"></td>
+        <td class="user" th:text="${appUser.birth_date}"></td>
+        <td class="user" th:text="${appUser.introduction}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

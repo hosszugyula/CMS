@@ -16,10 +16,6 @@ public class AppUserService {
 
     private final AppUserRepository userRepository;
 
-    public List<AppUser> getAppUsers() {
-        return userRepository.findAll();
-    }
-
     public AppUser getAppUserById(Long id) throws NotFoundException {
 
         Optional<AppUser> appUser = userRepository.findById(id);
@@ -30,6 +26,9 @@ public class AppUserService {
             return appUser.get();
         }
 
+    }
+    public List<AppUser> getAppUsers() {
+        return userRepository.findAll();
     }
 
 }

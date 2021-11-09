@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppUserDetails {
-
-    private String firstName;
-    private String surName;
-    private String introduction;
-    private LocalDate birthDate;
 
     @ElementCollection
     private List<String> interests = new ArrayList<>();
