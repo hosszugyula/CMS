@@ -33,10 +33,10 @@
     </thead>
     <tbody>
     <tr>
-        <td class="user" th:text="${appUser.first_name}"></td>
-        <td class="user" th:text="${appUser.sur_name}"></td>
-        <td class="user" th:text="${appUser.birth_date}"></td>
-        <td class="user" th:text="${appUser.introduction}"></td>
+        <td class="user" th:text="${appUser.details?.first_name}"></td>
+        <td class="user" th:text="${appUser.details?.sur_name}"></td>
+        <td class="user" th:text="${appUser.details?.birth_date}"></td>
+        <td class="user" th:text="${appUser.details?.introduction}"></td>
     </tr>
     </tbody>
 </table>

@@ -15,6 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 public class AppUserDetails {
 
+    private String first_name;
+    private String sur_name;
+    private String introduction;
+    private LocalDate birth_date;
+
     @ElementCollection
     private List<String> interests = new ArrayList<>();
 

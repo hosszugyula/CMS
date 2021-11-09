@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,8 +28,16 @@ public class AppUserService {
         }
 
     }
+
     public List<AppUser> getAppUsers() {
         return userRepository.findAll();
+    }
+
+    public List<AppUser> getUsers() {
+        return userRepository.findAll()
+                .stream()
+                .filter(x -> !x.getRoleNames().contains("ROLE_ADMIN"))
+                .collect(Collectors.toList());
     }
 
 }

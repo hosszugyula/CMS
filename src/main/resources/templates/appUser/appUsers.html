@@ -32,9 +32,9 @@
     </thead>
     <tbody>
     <tr th:each="user : ${appUsersList}">
-        <td class="user" th:text="${user.first_name}"></td>
-        <td class="user" th:text="${user.sur_name}"></td>
-        <td class="user" th:text="${user.birth_date}"></td>
+        <td class="user" th:text="${user.details?.first_name}"></td>
+        <td class="user" th:text="${user.details?.sur_name}"></td>
+        <td class="user" th:text="${user.details?.birth_date}"></td>
         <td class="user" th:href="@{/users/{id}(id=${user.id})}"><a th:href="@{/users/{id}(id=${user.id})}">Link</a></td>
     </tr>
     </tbody>

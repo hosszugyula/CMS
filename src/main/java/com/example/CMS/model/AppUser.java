@@ -21,11 +21,7 @@ public class AppUser {
 
     private String userName;
     private String encryptedPassword;
-    private String first_name;                      //ha ezek az AppUserDetailsben vannak akkor nem tudom listázni
-    private String sur_name;
-    private String introduction;
-    private LocalDate birth_date;
-    //private AppUserDetails details;
+    private AppUserDetails details;
 
     @ElementCollection(fetch=FetchType.EAGER)
     private List<String> roleNames = new ArrayList<>();
