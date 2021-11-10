@@ -57,19 +57,9 @@ public class MainController {
         return "loginPage";
     }
 
-    @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
-    public String logoutSuccessfulPage(Model model) {
-        model.addAttribute("title", "Logout");
-        return "logoutSuccessfulPage";
-    }
-
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
     public String userInfo(Model model, Principal principal) {
 
-        // (1) (en)
-        // After user login successfully.
-        // (vi)
-        // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
 
         System.out.println("User Name: " + userName);
@@ -100,7 +90,6 @@ public class MainController {
 
         return "403Page";
     }
-
 
     @RequestMapping(value = "/jobs")
     public String listOfJobsPage(Model model) {

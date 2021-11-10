@@ -7,38 +7,54 @@
     <title>Title</title>
     <style th:inline="css">
     body {background: #D1D1D1; text-align: center; font-family:Arial, sans-serif}
-    .tg  {width: 500px; margin-top: 50px;border-collapse:collapse;border-spacing:0; margin-left:auto;margin-right:auto;}
-    .tg td{background: #839192;border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-    overflow:hidden;padding:8px 8px;word-break:normal;}
-    .tg th{background: #212121;border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-    font-weight:normal;overflow:hidden;padding:8px 8px;word-break:normal; color: #FDFEFE }
-    .tg .column2{border-color:black;text-align:center;vertical-align:top}
-    .tg .column{border-color:black;text-align:center;vertical-align:top}
-    .tg .job{text-align:left;vertical-align:center}
+    .container {width: 50vw; height: 50vh;display: grid; grid-template-columns: 200px 400px;
+                grid-template-areas: "left right"; margin-left: auto; margin-right: auto;
+                margin-top: 200px; margin-bottom: 110px; font-size: 27px; border: 15px solid darkgrey; border-radius: 35px;
+                background-color: #fff;}
+    .username { grid-area: uname; }
+    .birth-date { grid-area: bd; }
+    .introduction { grid-area: intro; }
+    .icon { grid-area: icon; }
+    .fullname { grid-area: fname; margin-bottom: 90px;}
+    .left {background-color: #5FC3CA; display: grid; grid-template-rows: auto;
+            grid-template-areas: "icon" "fname";}
+    .right {text-align: left; margin-top: 30px; margin-left: 100px; display: grid; grid-template-rows: 1fr 1fr 1fr;
+            grid-template-areas: "uname" "bd" "intro";}
+    img {margin-top: 80px;}
+    .left .name {font-size: 27px;}
+    .right h3 {font-size: 27px;}
+    .right span {font-size: 21px;}
     </style>
 </head>
 <body>
 <th:block th:include="/_menu"></th:block>
 
-<h1>User XYZ</h1>
-<table class="tg">
-    <thead>
-    <tr>
-        <th class="column">Vezetéknév</th>
-        <th class="column">Keresztnév</th>
-        <th class="column">Születési Dátum</th>
-        <th class="column">Leírás</th>
+<div class="container">
+    <div class="left">
+    <div class="icon">
+        <img th:src="@{/img/user-icon.png}">
+    </div>
+    <div class="fullname">
+        <span class="name" th:text="${appUser.details?.first_name}"></span>
+        <span  class="name" th:text="${appUser.details?.sur_name}"></span>
+    </div>
+    </div>
+    <div class="right">
+    <div class="Felhasználónév">
+        <h3>Username:</h3>
+        <span th:text="${appUser.userName}"></span>
+    </div>
+    <div class="birth-date">
+        <h3>Születési dátum:</h3>
+        <span th:text="${appUser.details?.birth_date}"></span>
+    </div>
+    <div class="introduction">
+        <h3>Leírás:</h3>
+        <span th:text="${appUser.details?.introduction}"></span>
+    </div>
+    </div>
 
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td class="user" th:text="${appUser.details?.first_name}"></td>
-        <td class="user" th:text="${appUser.details?.sur_name}"></td>
-        <td class="user" th:text="${appUser.details?.birth_date}"></td>
-        <td class="user" th:text="${appUser.details?.introduction}"></td>
-    </tr>
-    </tbody>
-</table>
+</div>
+
 </body>
 </html>

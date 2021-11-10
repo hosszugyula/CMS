@@ -1,16 +1,18 @@
 <head xmlns:th="http://www.w3.org/1999/xhtml" >
     <style th:inline="css">
         body { margin-top: 0;margin-left: auto; margin-right: auto; font-family:Arial, sans-serif;}
-        .navbar {height: 80px;font-size: 15pt;display: grid;background-color: #212121;align-items: center;text-align: right}
-        .navbar a {color: white;margin: 12px;text-decoration: none;}
+        .navbar {font-size: 15pt;display: grid; overflow: hidden; background-color: #212121;align-items: center;text-align: right}
+        .navbar a {float: left; color: #f2f2f2; text-align: center; padding: 14px 16px; text-decoration: none; font-size: 17px;}
+        .navbar a:hover {background-color: #ddd; color: black;}
+        .navbar a.active {background-color: #4CAF50; color: white;}
     </style>
 </head>
 <body>
 <div class="navbar" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="list-items">
-    <a th:href="@{/}">Kezdőlap</a>
+    <a class="active" th:href="@{/}">Kezdőlap</a>
 
-    <a th:href="@{/users}">Személyek</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/users}">Személyek</a>
 
     <a th:href="@{/jobs}">Hirdetések</a>
 
@@ -18,7 +20,7 @@
 
     <a th:if="${#request.userPrincipal != null}" th:href="@{/userInfo}">Rólad</a>  <!--- csak akkor jelenik meg ha bevagy jelentkezve(jogosan)-->
 
-    <a sec:authorize access="hasRole('ROLE_ADMIN')" th:href="@{/admin}">Adminfül</a>  <!-- csak adminnak látható -->
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">Adminfül</a>  <!-- csak adminnak látható -->
 
     <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Kijelentkezés</a> <!--- csak akkor jelenik meg ha bevagy jelentkezve(jogosan)-->
     </div>
