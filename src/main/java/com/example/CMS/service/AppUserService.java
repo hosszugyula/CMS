@@ -9,16 +9,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class AppUserService {
 
     private final AppUserRepository userRepository;
-
-    public List<AppUser> getAppUsers() {
-        return userRepository.findAll();
-    }
 
     public AppUser getAppUserById(Long id) throws NotFoundException {
 
@@ -30,6 +27,17 @@ public class AppUserService {
             return appUser.get();
         }
 
+    }
+
+    public List<AppUser> getAppUsers() {
+        return userRepository.findAll();
+    }
+
+    public List<AppUser> getUsers() {
+        return userRepository.findAll()
+                .stream()
+                .filter(x -> !x.getRoleNames().contains("ROLE_ADMIN"))
+                .collect(Collectors.toList());
     }
 
 }

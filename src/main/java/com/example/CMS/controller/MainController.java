@@ -1,6 +1,9 @@
 package com.example.CMS.controller;
 
+import com.example.CMS.model.AppUser;
+import com.example.CMS.model.AppUserDetails;
 import com.example.CMS.model.JobAdvertisement;
+import com.example.CMS.service.AppUserService;
 import com.example.CMS.service.JobAdvertisementService;
 import com.example.CMS.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +22,16 @@ import java.util.List;
 public class MainController {
 
     private JobAdvertisementService jobAdvertisementService;
+    private AppUserService appUserService;
 
     @Autowired
     public void setJobAdvertisementService(JobAdvertisementService jobAdvertisementService) {
         this.jobAdvertisementService = jobAdvertisementService;
+    }
+
+    @Autowired
+    public void setAppUserService(AppUserService appUserService) {
+        this.appUserService = appUserService;
     }
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
@@ -99,7 +108,7 @@ public class MainController {
 
         List<JobAdvertisement> jobAdvertisementList = jobAdvertisementService.jobAdvertisements();
 
-        model.addAttribute("jobAdvertisementList",jobAdvertisementList );
+        model.addAttribute("jobAdvertisementList", jobAdvertisementList);
 
         return "jobAdvertisement/jobAdvertisements.html";
     }
@@ -107,15 +116,41 @@ public class MainController {
     @RequestMapping(value = "/jobs/{id}")
     public String jobPage(@PathVariable(value = "id") Long id, Model model) throws Exception {
 
-        JobAdvertisement jA =jobAdvertisementService.getJobAdvertisementById(id);
+        JobAdvertisement jA = jobAdvertisementService.getJobAdvertisementById(id);
         //TODO 404 or error page
-        if(jA == null){
-            throw  new Exception("Nincs ilyen id-val hírdetés");
+        if (jA == null) {
+            throw new Exception("Nincs ilyen id-val hírdetés");
         }
 
-        model.addAttribute("jobAdvertisement",jA );
+        model.addAttribute("jobAdvertisement", jA);
 
         return "jobAdvertisement/jobAdvertisementPage.html";
     }
+
+    @RequestMapping(value = "/users")
+    public String listOfUsersPage(Model model) {
+
+
+        List<AppUser> appUsersList = appUserService.getUsers();
+
+        model.addAttribute("appUsersList", appUsersList);
+
+        return "appUser/appUsers.html";
+    }
+
+    @RequestMapping(value = "/users/{id}")
+    public String userPage(@PathVariable(value = "id") Long id, Model model) throws Exception {
+
+        AppUser aU = appUserService.getAppUserById(id);
+        //TODO 404 or error page
+        if (aU == null) {
+            throw new Exception("Nincs ilyen id-val felhasználó");
+        }
+
+        model.addAttribute("appUser", aU);
+
+        return "appUser/appUsersPage.html";
+    }
+
 
 }

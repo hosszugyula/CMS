@@ -1,4 +1,4 @@
-<head xmlns:th="http://www.w3.org/1999/xhtml">
+<head xmlns:th="http://www.w3.org/1999/xhtml" >
     <style th:inline="css">
         body { margin-top: 0;margin-left: auto; margin-right: auto; font-family:Arial, sans-serif;}
         .navbar {height: 80px;font-size: 15pt;display: grid;background-color: #212121;align-items: center;text-align: right}
@@ -6,19 +6,21 @@
     </style>
 </head>
 <body>
-<div class="navbar" xmlns:th="http://www.thymeleaf.org">
+<div class="navbar" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="list-items">
     <a th:href="@{/}">Kezdőlap</a>
 
-    <a>Személyek</a>   <!--- Ez még nincs elkészítve --->
+    <a th:href="@{/users}">Személyek</a>
 
     <a th:href="@{/jobs}">Hirdetések</a>
 
-    <a th:href="@{/userInfo}">Rólad/Login</a>  <!--- ez lehetne a személyes infók oldal(userInfoPage) -->
+    <a th:if="${#request.userPrincipal == null}" th:href="@{/login}">Bejelentkezés</a> <!--- csak akkor jelenik meg ha nem vagy bejelentkezve(jogosan)-->
 
-    <a th:href="@{/admin}">Adminfül</a>
+    <a th:if="${#request.userPrincipal != null}" th:href="@{/userInfo}">Rólad</a>  <!--- csak akkor jelenik meg ha bevagy jelentkezve(jogosan)-->
 
-    <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Kijelentkezés</a>
+    <a sec:authorize access="hasRole('ROLE_ADMIN')" th:href="@{/admin}">Adminfül</a>  <!-- csak adminnak látható -->
+
+    <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Kijelentkezés</a> <!--- csak akkor jelenik meg ha bevagy jelentkezve(jogosan)-->
     </div>
 </div>
 </body>
