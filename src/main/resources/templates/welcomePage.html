@@ -5,20 +5,22 @@
     <style th:inline="css">
         body { font-family:Arial, sans-serif;}
         .container {display: grid; grid-template-columns: repeat(2,1fr);}
-        .message {margin-top: 180px; margin-left: 150px; }
+        .message {height: 80%;width: 50%;margin-top: 180px; margin-left: 150px; background: white; border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
+        color: white;box-shadow: 20px 20px rgba(0,0,0,.15);transition: all .4s ease;}
+        .message:hover { border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;box-shadow: 10px 10px rgba(0,0,0,.25);}
         h3 { font-size: 25px; }
-        .message ul {align-content: center;}
+        .message ul {align-content: center; color: black;}
         .message li { font-size: 19px; list-style: none; margin: 30px;}
     </style>
 </head>
 
-<body th:style="'background:url('+ @{/img/hiring.jpg} +');'">
+<body th:style="'background:url('+ @{/img/hiring.jpg} +') no-repeat; background-size: 100%'">
 
 <!-- Include _menu.html -->
 <th:block th:include="/_menu"></th:block>
 
 <div class="container">
-    <div class="empty">
+    <div class="image">
     </div>
     <div class="message">
         <ul>
