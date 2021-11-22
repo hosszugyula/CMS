@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Form</h1>
+<form action="#" th:action="@{/addAppUser}" th:object="${user}" method="post">
+    <p>UserName: <input type="text" th:field="${user.UserName}"/></p>
+    <p>Password: <input type="text" th:field="${user.EncryptedPassword}"/></p>
+    <p>Password: <input type="text" th:field="${user.RollNames}"/></p>
+    <p>First Name: <input type="text" th:field="${user.details.first_name}"/></p>
+    <p>Sur Name: <input type="text" th:field="${user.details.sur_name}"/></p>
+    <p>Születési dátum: <input type="text" th:field="${user.details.birth_date}"/></p>
+    <p>Leírás: <input type="text" th:field="${user.details.introduction}"/></p>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
+</body>
+</html>

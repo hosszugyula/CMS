@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -139,6 +140,14 @@ public class MainController {
         model.addAttribute("appUser", aU);
 
         return "appUser/appUsersPage.html";
+    }
+
+    @GetMapping("/addUser")
+    public  String addUserForm(Model model){
+        AppUser user = new AppUser();
+        user.setDetails(new AppUserDetails());
+        model.addAttribute("user",user);
+        return "appUser/addAppUser.html";
     }
 
 
