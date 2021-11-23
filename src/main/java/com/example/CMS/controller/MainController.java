@@ -9,11 +9,10 @@ import com.example.CMS.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -23,6 +22,7 @@ public class MainController {
 
     private JobAdvertisementService jobAdvertisementService;
     private AppUserService appUserService;
+
 
     @Autowired
     public void setJobAdvertisementService(JobAdvertisementService jobAdvertisementService) {
@@ -116,16 +116,6 @@ public class MainController {
         return "jobAdvertisement/jobAdvertisementPage.html";
     }
 
-    @RequestMapping(value = "/users")
-    public String listOfUsersPage(Model model) {
-
-
-        List<AppUser> appUsersList = appUserService.getUsers();
-
-        model.addAttribute("appUsersList", appUsersList);
-
-        return "appUser/appUsers.html";
-    }
 
     @RequestMapping(value = "/users/{id}")
     public String userPage(@PathVariable(value = "id") Long id, Model model) throws Exception {
@@ -139,6 +129,48 @@ public class MainController {
         model.addAttribute("appUser", aU);
 
         return "appUser/appUsersPage.html";
+    }
+
+    @GetMapping("/users")
+    public  String addUserForm(Model model){
+        List<AppUser> appUsersList = appUserService.getUsers();
+
+        model.addAttribute("appUsersList", appUsersList);
+        AppUser user = new AppUser();
+        user.setDetails(new AppUserDetails());
+        model.addAttribute("user",user);
+        return "appUser/appUsers.html";
+
+    }
+
+    @PostMapping("/users")
+    public  String addUserSubmit(@ModelAttribute("user") AppUser user, Model model) throws Exception {
+
+        try {
+            if(user.equals(appUserService.saveAppUser(user))){
+                AppUser userActual = new AppUser();
+                userActual.setDetails(new AppUserDetails());
+                model.addAttribute("user",userActual);
+                model.addAttribute("error",false);
+
+                List<AppUser> appUsersList = appUserService.getUsers();
+                model.addAttribute("appUsersList", appUsersList);
+                return "appUser/appUsers.html" ;
+            };
+        }catch (IllegalArgumentException e){
+
+            model.addAttribute("user",user);
+            model.addAttribute("error",true);
+            model.addAttribute("message",e.getMessage());
+            List<AppUser> appUsersList = appUserService.getUsers();
+            model.addAttribute("appUsersList", appUsersList);
+            return "appUser/appUsers.html";
+        }
+        model.addAttribute("user",user);
+        model.addAttribute("error",true);
+        model.addAttribute("message","Something went wrong!!");
+        return "appUser/appUsers.html";
+
     }
 
 
