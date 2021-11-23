@@ -6,6 +6,7 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,14 +42,17 @@ public class AppUserService {
                 .collect(Collectors.toList());
     }
 
-    public AppUser saveAppUser(AppUser user) throws Exception {
+    public AppUser saveAppUser(AppUser user) throws IllegalArgumentException {
 
         AppUser appUser = userRepository.findByUserName(user.getUserName());
 
         if (appUser != null) {
-            System.out.println("Username is already taken ! " + user.getUserName());
-            throw new Exception("Username is already taken ! " + user.getUserName());
+            System.out.println("Username is already taken: " + user.getUserName());
+            throw new IllegalArgumentException("Username is already taken: " + user.getUserName());
         }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setEncryptedPassword(encoder.encode(user.getEncryptedPassword()));
+
         return userRepository.save(user);
     }
 

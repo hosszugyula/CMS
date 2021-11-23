@@ -150,18 +150,28 @@ public class MainController {
 
     }
 
-    @PostMapping("/addUserPost")
+    @PostMapping("/addUser")
     public  String addUserSubmit(@ModelAttribute("user") AppUser user, Model model) throws Exception {
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setEncryptedPassword(encoder.encode(user.getEncryptedPassword()));
-        if(user.equals(appUserService.saveAppUser(user))){
-            AppUser userActual = new AppUser();
-            userActual.setDetails(new AppUserDetails());
-            model.addAttribute("user",userActual);
-            return "appUser/addAppUser.html" ;
-        };
-       throw new Exception("something went wrong");
+        try {
+            if(user.equals(appUserService.saveAppUser(user))){
+                AppUser userActual = new AppUser();
+                userActual.setDetails(new AppUserDetails());
+                model.addAttribute("user",userActual);
+                model.addAttribute("error",false);
+                return "appUser/addAppUser.html" ;
+            };
+        }catch (IllegalArgumentException e){
+
+            model.addAttribute("user",user);
+            model.addAttribute("error",true);
+            model.addAttribute("message",e.getMessage());
+            return "appUser/addAppUser.html";
+        }
+        model.addAttribute("user",user);
+        model.addAttribute("error",true);
+        model.addAttribute("message","Something went wrong!!");
+        return "appUser/addAppUser.html";
 
     }
 
