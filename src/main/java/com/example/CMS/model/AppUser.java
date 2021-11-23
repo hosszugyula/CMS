@@ -69,5 +69,6 @@ public class AppUser {
         return roleNames.contains(user);
     }
 
+    //ToDO enum for Roles
 
 }

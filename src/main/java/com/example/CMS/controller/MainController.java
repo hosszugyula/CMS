@@ -143,6 +143,9 @@ public class MainController {
 
     @GetMapping("/users")
     public  String addUserForm(Model model){
+        List<AppUser> appUsersList = appUserService.getUsers();
+
+        model.addAttribute("appUsersList", appUsersList);
         AppUser user = new AppUser();
         user.setDetails(new AppUserDetails());
         model.addAttribute("user",user);
@@ -159,6 +162,9 @@ public class MainController {
                 userActual.setDetails(new AppUserDetails());
                 model.addAttribute("user",userActual);
                 model.addAttribute("error",false);
+                List<AppUser> appUsersList = appUserService.getUsers();
+
+                model.addAttribute("appUsersList", appUsersList);
                 return "appUser/appUsers.html" ;
             };
         }catch (IllegalArgumentException e){
