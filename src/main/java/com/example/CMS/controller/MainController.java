@@ -141,16 +141,16 @@ public class MainController {
         return "appUser/appUsersPage.html";
     }
 
-    @GetMapping("/addUser")
+    @GetMapping("/users")
     public  String addUserForm(Model model){
         AppUser user = new AppUser();
         user.setDetails(new AppUserDetails());
         model.addAttribute("user",user);
-        return "appUser/addAppUser.html";
+        return "appUser/appUsers.html";
 
     }
 
-    @PostMapping("/addUser")
+    @PostMapping("/users")
     public  String addUserSubmit(@ModelAttribute("user") AppUser user, Model model) throws Exception {
 
         try {
@@ -159,19 +159,19 @@ public class MainController {
                 userActual.setDetails(new AppUserDetails());
                 model.addAttribute("user",userActual);
                 model.addAttribute("error",false);
-                return "appUser/addAppUser.html" ;
+                return "appUser/appUsers.html" ;
             };
         }catch (IllegalArgumentException e){
 
             model.addAttribute("user",user);
             model.addAttribute("error",true);
             model.addAttribute("message",e.getMessage());
-            return "appUser/addAppUser.html";
+            return "appUser/appUsers.html";
         }
         model.addAttribute("user",user);
         model.addAttribute("error",true);
         model.addAttribute("message","Something went wrong!!");
-        return "appUser/addAppUser.html";
+        return "appUser/appUsers.html";
 
     }
 

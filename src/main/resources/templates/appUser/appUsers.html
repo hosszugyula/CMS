@@ -7,6 +7,11 @@
     <title>Title</title>
     <style th:inline="css">
     body {background: #D1D1D1; text-align: center; font-family:Arial, sans-serif}
+    .container {display: grid; grid-template-columns: auto;
+                grid-template-areas: "left right"; margin-left: auto; margin-right: auto;
+                border-radius: 15px;}
+    .left {grid-area: left;}
+    .right {grid-are: right;}
     .tg  {width: 500px; margin-top: 50px;border-collapse:collapse;border-spacing:0; margin-left:auto;margin-right:auto;}
     .tg td{background: #839192;border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
     overflow:hidden;padding:8px 8px;word-break:normal;}
@@ -20,6 +25,15 @@
 <body>
 <th:block th:include="/_menu"></th:block>
 
+<div th:if="${error} == true">
+    Failed!!!<br />
+    <span th:if="${message} != null"
+          th:utext="${message}">
+                Static summary
+         </span>
+</div>
+<div class="container">
+    <div class="right">
 <h1>List of Users</h1>
 <table class="tg">
     <thead>
@@ -39,5 +53,21 @@
     </tr>
     </tbody>
 </table>
+    </div>
+    <div class="left">
+<h1>Form</h1>
+<form action="#" th:action="@{/users}" th:object="${user}" method="post">
+    <p>UserName: <input type="text" th:field="*{UserName}"/></p>
+    <p>Password: <input type="text" th:field="*{EncryptedPassword}"/></p>
+    <p>Admin: <input type="checkbox" th:field="*{IsAdmin}" /></p>
+    <p>User: <input type="checkbox" th:field="*{IsUser}" /></p>
+    <p>First Name: <input type="text" th:field="*{details.first_name}"/></p>
+    <p>Sur Name: <input type="text" th:field="*{details.sur_name}"/></p>
+    <p>Születési dátum: <input type="date" th:field="*{details.birth_date}"/></p>
+    <p>Leírás: <input type="text" th:field="*{details.introduction}"/></p>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
+    </div>
+</div>
 </body>
 </html>
