@@ -116,16 +116,6 @@ public class MainController {
         return "jobAdvertisement/jobAdvertisementPage.html";
     }
 
-    @RequestMapping(value = "/users")
-    public String listOfUsersPage(Model model) {
-
-
-        List<AppUser> appUsersList = appUserService.getUsers();
-
-        model.addAttribute("appUsersList", appUsersList);
-
-        return "appUser/appUsers.html";
-    }
 
     @RequestMapping(value = "/users/{id}")
     public String userPage(@PathVariable(value = "id") Long id, Model model) throws Exception {
@@ -162,8 +152,8 @@ public class MainController {
                 userActual.setDetails(new AppUserDetails());
                 model.addAttribute("user",userActual);
                 model.addAttribute("error",false);
-                List<AppUser> appUsersList = appUserService.getUsers();
 
+                List<AppUser> appUsersList = appUserService.getUsers();
                 model.addAttribute("appUsersList", appUsersList);
                 return "appUser/appUsers.html" ;
             };
@@ -172,6 +162,8 @@ public class MainController {
             model.addAttribute("user",user);
             model.addAttribute("error",true);
             model.addAttribute("message",e.getMessage());
+            List<AppUser> appUsersList = appUserService.getUsers();
+            model.addAttribute("appUsersList", appUsersList);
             return "appUser/appUsers.html";
         }
         model.addAttribute("user",user);
