@@ -9,12 +9,10 @@ import com.example.CMS.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -24,6 +22,7 @@ public class MainController {
 
     private JobAdvertisementService jobAdvertisementService;
     private AppUserService appUserService;
+
 
     @Autowired
     public void setJobAdvertisementService(JobAdvertisementService jobAdvertisementService) {
@@ -148,6 +147,22 @@ public class MainController {
         user.setDetails(new AppUserDetails());
         model.addAttribute("user",user);
         return "appUser/addAppUser.html";
+
+    }
+
+    @PostMapping("/addUserPost")
+    public  String addUserSubmit(@ModelAttribute("user") AppUser user, Model model) throws Exception {
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setEncryptedPassword(encoder.encode(user.getEncryptedPassword()));
+        if(user.equals(appUserService.saveAppUser(user))){
+            AppUser userActual = new AppUser();
+            userActual.setDetails(new AppUserDetails());
+            model.addAttribute("user",userActual);
+            return "appUser/addAppUser.html" ;
+        };
+       throw new Exception("something went wrong");
+
     }
 
 
