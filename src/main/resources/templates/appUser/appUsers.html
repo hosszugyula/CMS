@@ -53,6 +53,8 @@
         <td class="user" th:text="${user.details?.sur_name}"></td>
         <td class="user" th:text="${user.details?.birth_date}"></td>
         <td class="user" th:href="@{/users/{id}(id=${user.id})}"><a th:href="@{/users/{id}(id=${user.id})}">Link</a></td>
+        <td class="user" th:href="@{/users/update/{id}(id=${user.id})}"><a th:href="@{/users/update/{id}(id=${user.id})}">Update</a></td>
+
     </tr>
     </tbody>
 </table>
@@ -60,6 +62,8 @@
     <div class="left">
 <h1>Személy hozzáadása</h1>
 <form action="#" th:action="@{/users}" th:object="${user}" method="post">
+    <label>ID:</label><br>
+    <input type="text" id="number" th:field="*{Id}"><br>
     <label>Felhasználónév:</label><br>
     <input type="text" id="uname" th:field="*{UserName}"><br>
     <label>Jelszó:</label><br>

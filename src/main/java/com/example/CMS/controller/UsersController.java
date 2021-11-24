@@ -48,12 +48,11 @@ public class UsersController {
     }
 
     @GetMapping("/users/update/{id}")
-    public String getUserForUpdate(@PathVariable(value = "id") Long id,Model model) {
+    public String getUserForUpdate(@PathVariable(value = "id") Long id, Model model) {
         List<AppUser> appUsersList = appUserService.getUsers();
 
         model.addAttribute("appUsersList", appUsersList);
         AppUser user = new AppUser();
-        user.setDetails(new AppUserDetails());
         try {
             user = appUserService.getAppUserForUpdateById(id);
         } catch (NotFoundException e) {
@@ -61,41 +60,46 @@ public class UsersController {
             model.addAttribute("error", true);
             model.addAttribute("message", e.getMessage());
         }
-        user.setDetails(new AppUserDetails());
+        System.out.println(user.getId());
         model.addAttribute("user", user);
         return "appUser/appUsers.html";
 
     }
 
     @PostMapping("/users")
-    public String addUserSubmit(@ModelAttribute("user") AppUser user, Model model) throws Exception {
+    public String addUserSubmit(@ModelAttribute("user") AppUser user, Model model) {
 
+        System.out.println(user.getId());
         try {
-            if (user.equals(appUserService.saveAppUser(user))) {
-                AppUser userActual = new AppUser();
-                userActual.setDetails(new AppUserDetails());
-                model.addAttribute("user", userActual);
-                model.addAttribute("error", false);
-
-                List<AppUser> appUsersList = appUserService.getUsers();
-                model.addAttribute("appUsersList", appUsersList);
-                return "appUser/appUsers.html";
+            if (user.getId() == null) {
+                if (user.equals(appUserService.saveAppUser(user))) {
+                    modelCreator(model, new AppUser(), false, null);
+                    return "appUser/appUsers.html";
+                }
+            } else {
+                if (user.equals(appUserService.updateAppUser(user))) {
+                    modelCreator(model, new AppUser(), false, null);
+                    return "appUser/appUsers.html";
+                }
             }
-            ;
+
         } catch (IllegalArgumentException e) {
 
-            model.addAttribute("user", user);
-            model.addAttribute("error", true);
-            model.addAttribute("message", e.getMessage());
-            List<AppUser> appUsersList = appUserService.getUsers();
-            model.addAttribute("appUsersList", appUsersList);
+            modelCreator(model, user, true, e.getMessage());
             return "appUser/appUsers.html";
         }
-        model.addAttribute("user", user);
-        model.addAttribute("error", true);
-        model.addAttribute("message", "Something went wrong!!");
+        modelCreator(model, user, true, "Something went wrong!!");
         return "appUser/appUsers.html";
 
+    }
+
+    private Model modelCreator(Model model, AppUser user, boolean error, String message) {
+        model.addAttribute("user", user);
+        model.addAttribute("error", error);
+        model.addAttribute("message", message);
+        List<AppUser> appUsersList = appUserService.getUsers();
+        model.addAttribute("appUsersList", appUsersList);
+        return model;
     }
 
 }

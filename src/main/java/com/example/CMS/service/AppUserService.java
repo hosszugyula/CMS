@@ -59,7 +59,7 @@ public class AppUserService {
 
         if (userRepository.existsByUserName(user.getUserName())) {
             System.out.println("Username is already taken: " + user.getUserName());
-            throw new IllegalArgumentException("Username is already taken: " + user.getUserName());
+            throw new IllegalArgumentException("Username is already taken: " + user.getUserName()+"from save");
         }
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setEncryptedPassword(encoder.encode(user.getEncryptedPassword()));
@@ -67,5 +67,27 @@ public class AppUserService {
         return userRepository.save(user);
     }
 
- 
+
+    public AppUser updateAppUser(AppUser updatedUser) {
+
+        AppUser originalUser = userRepository.findById(updatedUser.getId()).get();
+
+        if (!originalUser.getUserName().equals(updatedUser.getUserName())){
+            if (userRepository.existsByUserName(updatedUser.getUserName())) {
+                System.out.println("Username is already taken: " + updatedUser.getUserName());
+                throw new IllegalArgumentException("Username is already taken: " + updatedUser.getUserName()+"from update");
+            }
+        }
+        System.out.println(updatedUser.getEncryptedPassword());
+        if(updatedUser.getEncryptedPassword() == null){
+            updatedUser.setEncryptedPassword(originalUser.getEncryptedPassword());
+        }else {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            updatedUser.setEncryptedPassword(encoder.encode(updatedUser.getEncryptedPassword()));
+
+        }
+
+        System.out.println(updatedUser.getEncryptedPassword());
+        return userRepository.save(updatedUser);
+    }
 }
