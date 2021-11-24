@@ -31,6 +31,20 @@ public class AppUserService {
 
     }
 
+    public AppUser getAppUserForUpdateById(Long id) throws NotFoundException {
+
+        Optional<AppUser> OptionalAppUser = userRepository.findById(id);
+
+        if (OptionalAppUser.isEmpty()) {
+            throw new NotFoundException("User does not exist with this ID"+id);
+        } else {
+            AppUser user = OptionalAppUser.get();
+            user.setEncryptedPassword("");
+            System.out.println("getAppUserForUpdateById:"+user.getEncryptedPassword());
+            return user;
+        }
+
+    }
     public List<AppUser> getAppUsers() {
         return userRepository.findAll();
     }
@@ -44,11 +58,9 @@ public class AppUserService {
 
     public AppUser saveAppUser(AppUser user) throws IllegalArgumentException {
 
-        AppUser appUser = userRepository.findByUserName(user.getUserName());
-
-        if (appUser != null) {
+        if (userRepository.existsByUserName(user.getUserName())) {
             System.out.println("Username is already taken: " + user.getUserName());
-            throw new IllegalArgumentException("Username is already taken: " + user.getUserName());
+            throw new IllegalArgumentException("Username is already taken: " + user.getUserName()+"from save");
         }
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setEncryptedPassword(encoder.encode(user.getEncryptedPassword()));
@@ -56,4 +68,31 @@ public class AppUserService {
         return userRepository.save(user);
     }
 
+
+    public AppUser updateAppUser(AppUser updatedUser) {
+
+        AppUser originalUser = userRepository.findById(updatedUser.getId()).get();
+
+        if (!originalUser.getUserName().equals(updatedUser.getUserName())){
+            if (userRepository.existsByUserName(updatedUser.getUserName())) {
+                System.out.println("Username is already taken: " + updatedUser.getUserName());
+                throw new IllegalArgumentException("Username is already taken: " + updatedUser.getUserName()+"from update");
+            }
+        }
+        System.out.println("updateduser jelszo: "+updatedUser.getEncryptedPassword());
+        if(updatedUser.getEncryptedPassword() == ""){
+            System.out.println("original psssword: "+originalUser.getEncryptedPassword());
+            updatedUser.setEncryptedPassword(originalUser.getEncryptedPassword());
+            System.out.println("original psssword: "+originalUser.getEncryptedPassword());
+
+        }else {
+            System.out.println("new password");
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            updatedUser.setEncryptedPassword(encoder.encode(updatedUser.getEncryptedPassword()));
+
+        }
+
+        System.out.println(updatedUser.getEncryptedPassword());
+        return userRepository.save(updatedUser);
+    }
 }
