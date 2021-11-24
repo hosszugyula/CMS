@@ -14,15 +14,17 @@
     .right {grid-are: right; width: 98%}
     form {text-align: left; box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
     padding: 20px; border-radius: 0 0 2px 2px; background-color: #FFF;}
-    .tg { width: 100%; border-collapse: collapse; margin-left: auto; margin-right: auto; font-size: 0.9em; font-family: sans-serif; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);}
+    .tg { width: 100%; border-collapse: collapse; margin-left: auto; margin-right: auto; font-size: 0.9em; font-family: sans-serif;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);}
     .tg thead tr { background-color: #009879; color: #ffffff; text-align: left;}
     .tg th, .tg td { padding: 12px 15px;}
     .tg tbody tr {border-bottom: 1px solid #dddddd;}
     .tg tbody tr:nth-of-type(even) {background-color: #f3f3f3;}
     .tg tbody tr:last-of-type { border-bottom: 2px solid #009879;}
     .tg tbody tr.active-row { font-weight: bold; color: #009879;}
-    input[type=text], input[type=checkbox], input[type=submit], input[type=reset], input[type=date], textarea {padding: 15px 20px; margin: 8px 0;display: inline-block;
-    border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
+    .tg .column {text-align: center;}
+    input[type=text], input[type=checkbox], input[type=submit], input[type=reset], input[type=date], textarea {padding: 15px 20px;
+           margin: 3px 0;display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
     </style>
 </head>
 <body>
@@ -45,6 +47,7 @@
         <th class="column">Keresztnév</th>
         <th class="column">Születési Dátum</th>
         <th class="column">Részletek</th>
+        <th class="column">Módosítás</th>
     </tr>
     </thead>
     <tbody>
@@ -53,7 +56,7 @@
         <td class="user" th:text="${user.details?.sur_name}"></td>
         <td class="user" th:text="${user.details?.birth_date}"></td>
         <td class="user" th:href="@{/users/{id}(id=${user.id})}"><a th:href="@{/users/{id}(id=${user.id})}">Link</a></td>
-        <td class="user" th:href="@{/users/update/{id}(id=${user.id})}"><a th:href="@{/users/update/{id}(id=${user.id})}">Update</a></td>
+        <td class="user" th:href="@{/users/update/{id}(id=${user.id})}"><a th:href="@{/users/update/{id}(id=${user.id})}">Módosítás</a></td>
 
     </tr>
     </tbody>
