@@ -55,6 +55,7 @@ public class UsersController {
         AppUser user = new AppUser();
         try {
             user = appUserService.getAppUserForUpdateById(id);
+            System.out.println("getUserForUpdate"+user.getEncryptedPassword());
         } catch (NotFoundException e) {
             e.printStackTrace();
             model.addAttribute("error", true);
@@ -77,6 +78,7 @@ public class UsersController {
                     return "appUser/appUsers.html";
                 }
             } else {
+                System.out.println("addUserSubmit:" + user.getEncryptedPassword());
                 if (user.equals(appUserService.updateAppUser(user))) {
                     modelCreator(model, new AppUser(), false, null);
                     return "appUser/appUsers.html";

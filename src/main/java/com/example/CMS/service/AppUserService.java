@@ -39,7 +39,8 @@ public class AppUserService {
             throw new NotFoundException("User does not exist with this ID"+id);
         } else {
             AppUser user = OptionalAppUser.get();
-            user.setEncryptedPassword(null);
+            user.setEncryptedPassword("");
+            System.out.println("getAppUserForUpdateById:"+user.getEncryptedPassword());
             return user;
         }
 
@@ -78,10 +79,14 @@ public class AppUserService {
                 throw new IllegalArgumentException("Username is already taken: " + updatedUser.getUserName()+"from update");
             }
         }
-        System.out.println(updatedUser.getEncryptedPassword());
-        if(updatedUser.getEncryptedPassword() == null){
+        System.out.println("updateduser jelszo: "+updatedUser.getEncryptedPassword());
+        if(updatedUser.getEncryptedPassword() == ""){
+            System.out.println("original psssword: "+originalUser.getEncryptedPassword());
             updatedUser.setEncryptedPassword(originalUser.getEncryptedPassword());
+            System.out.println("original psssword: "+originalUser.getEncryptedPassword());
+
         }else {
+            System.out.println("new password");
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             updatedUser.setEncryptedPassword(encoder.encode(updatedUser.getEncryptedPassword()));
 
