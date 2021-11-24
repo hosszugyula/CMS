@@ -31,6 +31,19 @@ public class AppUserService {
 
     }
 
+    public AppUser getAppUserForUpdateById(Long id) throws NotFoundException {
+
+        Optional<AppUser> OptionalAppUser = userRepository.findById(id);
+
+        if (OptionalAppUser.isEmpty()) {
+            throw new NotFoundException("User does not exist with this ID"+id);
+        } else {
+            AppUser user = OptionalAppUser.get();
+            user.setEncryptedPassword(null);
+            return user;
+        }
+
+    }
     public List<AppUser> getAppUsers() {
         return userRepository.findAll();
     }
@@ -44,9 +57,7 @@ public class AppUserService {
 
     public AppUser saveAppUser(AppUser user) throws IllegalArgumentException {
 
-        AppUser appUser = userRepository.findByUserName(user.getUserName());
-
-        if (appUser != null) {
+        if (userRepository.existsByUserName(user.getUserName())) {
             System.out.println("Username is already taken: " + user.getUserName());
             throw new IllegalArgumentException("Username is already taken: " + user.getUserName());
         }
@@ -56,4 +67,5 @@ public class AppUserService {
         return userRepository.save(user);
     }
 
+ 
 }

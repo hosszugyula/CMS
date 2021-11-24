@@ -3,6 +3,7 @@ package com.example.CMS.controller;
 import com.example.CMS.model.AppUser;
 import com.example.CMS.model.AppUserDetails;
 import com.example.CMS.service.AppUserService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +41,26 @@ public class UsersController {
 
         model.addAttribute("appUsersList", appUsersList);
         AppUser user = new AppUser();
+        user.setDetails(new AppUserDetails());
+        model.addAttribute("user", user);
+        return "appUser/appUsers.html";
+
+    }
+
+    @GetMapping("/users/update/{id}")
+    public String getUserForUpdate(@PathVariable(value = "id") Long id,Model model) {
+        List<AppUser> appUsersList = appUserService.getUsers();
+
+        model.addAttribute("appUsersList", appUsersList);
+        AppUser user = new AppUser();
+        user.setDetails(new AppUserDetails());
+        try {
+            user = appUserService.getAppUserForUpdateById(id);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+            model.addAttribute("error", true);
+            model.addAttribute("message", e.getMessage());
+        }
         user.setDetails(new AppUserDetails());
         model.addAttribute("user", user);
         return "appUser/appUsers.html";
