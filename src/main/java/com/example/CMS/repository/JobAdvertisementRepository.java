@@ -16,4 +16,5 @@ public interface JobAdvertisementRepository extends CrudRepository<JobAdvertisem
     @Override
     List<JobAdvertisement> findAll();
 
+    JobAdvertisement findByForwarder(String forwarder);
 }

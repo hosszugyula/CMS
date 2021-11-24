@@ -28,4 +28,16 @@ public class JobAdvertisementService {
     public List<JobAdvertisement> jobAdvertisements(){
         return jobAdvertisementRepo.findAll();
     }
+
+    public JobAdvertisement saveJobAdvertisement(JobAdvertisement job) throws IllegalArgumentException {
+
+        JobAdvertisement jobAdvertisement = jobAdvertisementRepo.findByForwarder(job.getForwarder());
+
+        if (jobAdvertisement != null) {
+            System.out.println("Jobadvertisement is already taken: " + job.getForwarder());
+            throw new IllegalArgumentException("Job is already taken: " + job.getForwarder());
+        }
+
+        return jobAdvertisementRepo.save(job);
+    }
 }

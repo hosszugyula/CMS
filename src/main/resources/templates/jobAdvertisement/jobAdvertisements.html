@@ -7,25 +7,43 @@
     <title>Title</title>
     <style th:inline="css">
     body {background: #D1D1D1; text-align: center; font-family:Arial, sans-serif}
-    .tg  {width: 500px; margin-top: 50px;border-collapse:collapse;border-spacing:0; margin-left:auto;margin-right:auto;}
-    .tg td{background: #839192;border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-    overflow:hidden;padding:8px 8px;word-break:normal;}
-    .tg th{background: #212121;border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-    font-weight:normal;overflow:hidden;padding:8px 8px;word-break:normal; color: #FDFEFE }
-    .tg .column2{border-color:black;text-align:center;vertical-align:top}
-    .tg .column{border-color:black;text-align:center;vertical-align:top}
-    .tg .job{text-align:left;vertical-align:center}
+    .container {display: grid; grid-template-columns: auto;
+                grid-template-areas: "left right"; margin-left: auto; margin-right: auto;
+                border-radius: 15px;}
+    .left {grid-area: left; margin-right: auto; margin-left: auto; width: 70%;}
+    .right {grid-are: right; width: 98%}
+    form {text-align: left; box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+    padding: 20px; border-radius: 0 0 2px 2px; background-color: #FFF;}
+    .tg { width: 100%; border-collapse: collapse; margin-left: auto; margin-right: auto; font-size: 0.9em; font-family: sans-serif; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);}
+    .tg thead tr { background-color: #009879; color: #ffffff; text-align: left;}
+    .tg th, .tg td { padding: 12px 15px;}
+    .tg tbody tr {border-bottom: 1px solid #dddddd;}
+    .tg tbody tr:nth-of-type(even) {background-color: #f3f3f3;}
+    .tg tbody tr:last-of-type { border-bottom: 2px solid #009879;}
+    .tg tbody tr.active-row { font-weight: bold; color: #009879;}
+    input[type=text], input[type=submit], input[type=reset], textarea {padding: 15px 20px; margin: 8px 0;display: inline-block;
+    border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
     </style>
 </head>
 <body>
 
 <th:block th:include="/_menu"></th:block>
 
-<h1>List of Advertisements</h1>
+<div th:if="${error} == true">
+    Failed!!!<br />
+    <span th:if="${message} != null"
+          th:utext="${message}">
+                Static summary
+         </span>
+</div>
+
+<div class="container">
+    <div class="right">
+<h1>Álláshirdetések</h1>
 <table class="tg">
     <thead>
     <tr>
-        <th class="column">Munkakör XYZXYZ</th>
+        <th class="column">Munkakör XYZ</th>
         <th class="column">XYZ KFT</th>
         <th class="column2"> Részletek </th>
     </tr>
@@ -38,6 +56,20 @@
     </tr>
     </tbody>
 </table>
-
+    </div>
+    <div class="left">
+<h1>Álláshirdetés hozzáadása</h1>
+<form action="#" th:action="@{/jobs}" th:object="${job}" method="post">
+    <label>Munakkör:</label>
+    <input type="text" th:field="*{scope}"><br>
+    <label>Cég neve:</label><br>
+    <input type="text" th:field="*{forwarder}"><br>
+    <label>Leírás:</label><br>
+    <textarea th:field="*{content}"></textarea><br>
+    <input type="submit" value="Hozzáadás">
+    <input type="reset" value="Visszaállítás">
+</form>
+    </div>
+</div>
 </body>
 </html>
