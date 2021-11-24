@@ -62,8 +62,7 @@
     <div class="left">
 <h1>Személy hozzáadása</h1>
 <form action="#" th:action="@{/users}" th:object="${user}" method="post">
-    <label>ID:</label><br>
-    <input type="text" id="number" th:field="*{Id}"><br>
+    <input type="hidden" id="number" th:field="*{Id}"><br>
     <label>Felhasználónév:</label><br>
     <input type="text" id="uname" th:field="*{UserName}"><br>
     <label>Jelszó:</label><br>
