@@ -4,6 +4,7 @@ import com.example.CMS.model.AppUser;
 import com.example.CMS.model.AppUserDetails;
 import com.example.CMS.model.JobAdvertisement;
 import com.example.CMS.service.JobAdvertisementService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +41,20 @@ public class JobsController {
 
         model.addAttribute("jobAdvertisementList", jobAdvertisementList);
         JobAdvertisement job = new JobAdvertisement();
+        model.addAttribute("job", job);
+        return "jobAdvertisement/jobAdvertisements.html";
+
+    }
+
+    @GetMapping("/jobs/update/{id}")
+    public String getJobForUpdate(@PathVariable(value = "id") Long id, Model model) {
+        List<JobAdvertisement> jobAdvertisementList = jobAdvertisementService.jobAdvertisements();
+
+        model.addAttribute("jobAdvertisementList", jobAdvertisementList);
+        JobAdvertisement job = new JobAdvertisement();
+        job = jobAdvertisementService.getJobAdvertisementById(id);
+        System.out.println("getJobForUpdate"+job.getId());
+        System.out.println(job.getId());
         model.addAttribute("job", job);
         return "jobAdvertisement/jobAdvertisements.html";
 

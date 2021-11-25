@@ -1,8 +1,10 @@
 package com.example.CMS.service;
 
+import com.example.CMS.model.AppUser;
 import com.example.CMS.repository.JobAdvertisementRepository;
 import com.example.CMS.model.JobAdvertisement;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,11 +35,12 @@ public class JobAdvertisementService {
 
         JobAdvertisement jobAdvertisement = jobAdvertisementRepo.findByForwarder(job.getForwarder());
 
-        if (jobAdvertisement != null) {
-            System.out.println("Jobadvertisement is already taken: " + job.getForwarder());
-            throw new IllegalArgumentException("Job is already taken: " + job.getForwarder());
-        }
-
         return jobAdvertisementRepo.save(job);
+    }
+
+    public JobAdvertisement updateJobAdvertisement(JobAdvertisement updatedJob) {
+        JobAdvertisement originalJob = jobAdvertisementRepo.findById(updatedJob.getId()).get();
+
+        return jobAdvertisementRepo.save(updatedJob);
     }
 }
