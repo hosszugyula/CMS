@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,14 +34,15 @@ public class JobAdvertisementService {
 
     public JobAdvertisement saveJobAdvertisement(JobAdvertisement job) throws IllegalArgumentException {
 
-        JobAdvertisement jobAdvertisement = jobAdvertisementRepo.findByForwarder(job.getForwarder());
-
         return jobAdvertisementRepo.save(job);
     }
 
     public JobAdvertisement updateJobAdvertisement(JobAdvertisement updatedJob) {
-        JobAdvertisement originalJob = jobAdvertisementRepo.findById(updatedJob.getId()).get();
 
         return jobAdvertisementRepo.save(updatedJob);
+    }
+
+    public void delete(Long id) {
+        jobAdvertisementRepo.deleteById(id);
     }
 }

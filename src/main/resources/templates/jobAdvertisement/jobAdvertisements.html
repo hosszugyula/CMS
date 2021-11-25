@@ -28,6 +28,14 @@
     </style>
 </head>
 <body>
+<script>
+function clicked(e)
+{
+    if(!confirm('Are you sure?')) {
+        e.preventDefault();
+    }
+}
+</script>
 
 <th:block th:include="/_menu"></th:block>
 
@@ -49,6 +57,7 @@
         <th class="column">XYZ KFT</th>
         <th class="column"> Részletek </th>
         <th class="column">Módosítás</th>
+        <th class="column">Törlés</th>
     </tr>
     </thead>
     <tbody>
@@ -57,6 +66,7 @@
         <td class="job" th:text="${job.Forwarder}"></td>
         <td class="job" th:href="@{/jobs/{id}(id=${job.id})}"><a th:href="@{/jobs/{id}(id=${job.id})}">Link</a></td>
         <td class="job" th:href="@{/jobs/update/{id}(id=${job.id})}"><a th:href="@{/jobs/update/{id}(id=${job.id})}">Módosítás</a></td>
+        <td class="job" th:href="@{/jobs/delete/{id}(id=${job.id})}"><a th:href="@{/jobs/delete/{id}(id=${job.id})}" onclick="clicked(event)">Törlés</a></td>
     </tr>
     </tbody>
 </table>
