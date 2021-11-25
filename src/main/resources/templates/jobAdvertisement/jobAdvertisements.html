@@ -28,6 +28,14 @@
     </style>
 </head>
 <body>
+<script>
+function clicked(e)
+{
+    if(!confirm('Are you sure?')) {
+        e.preventDefault();
+    }
+}
+</script>
 
 <th:block th:include="/_menu"></th:block>
 
@@ -47,7 +55,9 @@
     <tr>
         <th class="column">Munkakör XYZ</th>
         <th class="column">XYZ KFT</th>
-        <th class="column2"> Részletek </th>
+        <th class="column"> Részletek </th>
+        <th class="column">Módosítás</th>
+        <th class="column">Törlés</th>
     </tr>
     </thead>
     <tbody>
@@ -55,6 +65,8 @@
         <td class="job" th:text="${job.Scope}"></td>
         <td class="job" th:text="${job.Forwarder}"></td>
         <td class="job" th:href="@{/jobs/{id}(id=${job.id})}"><a th:href="@{/jobs/{id}(id=${job.id})}">Link</a></td>
+        <td class="job" th:href="@{/jobs/update/{id}(id=${job.id})}"><a th:href="@{/jobs/update/{id}(id=${job.id})}">Módosítás</a></td>
+        <td class="job" th:href="@{/jobs/delete/{id}(id=${job.id})}"><a th:href="@{/jobs/delete/{id}(id=${job.id})}" onclick="clicked(event)">Törlés</a></td>
     </tr>
     </tbody>
 </table>
@@ -62,6 +74,7 @@
     <div class="left">
 <h1>Álláshirdetés hozzáadása</h1>
 <form action="#" th:action="@{/jobs}" th:object="${job}" method="post">
+    <input type="hidden" id="number" th:field="*{Id}"><br>
     <label>Munakkör:</label><br>
     <input type="text" th:field="*{scope}"><br>
     <label>Cég neve:</label><br>
