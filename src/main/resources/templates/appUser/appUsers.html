@@ -48,6 +48,7 @@
         <th class="column">Születési Dátum</th>
         <th class="column">Részletek</th>
         <th class="column">Módosítás</th>
+        <th class="column">Törlés</th>
     </tr>
     </thead>
     <tbody>
@@ -57,7 +58,7 @@
         <td class="user" th:text="${user.details?.birth_date}"></td>
         <td class="user" th:href="@{/users/{id}(id=${user.id})}"><a th:href="@{/users/{id}(id=${user.id})}">Link</a></td>
         <td class="user" th:href="@{/users/update/{id}(id=${user.id})}"><a th:href="@{/users/update/{id}(id=${user.id})}">Módosítás</a></td>
-
+        <td class="user" th:href="@{/users/delete/{id}(id=${user.id})}"><a th:href="@{/users/delete/{id}(id=${user.id})}">Törlés</a></td>
     </tr>
     </tbody>
 </table>

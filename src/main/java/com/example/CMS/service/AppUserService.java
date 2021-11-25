@@ -95,4 +95,7 @@ public class AppUserService {
         System.out.println(updatedUser.getEncryptedPassword());
         return userRepository.save(updatedUser);
     }
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
 }

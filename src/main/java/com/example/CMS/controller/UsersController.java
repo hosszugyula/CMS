@@ -2,6 +2,7 @@ package com.example.CMS.controller;
 
 import com.example.CMS.model.AppUser;
 import com.example.CMS.model.AppUserDetails;
+import com.example.CMS.model.JobAdvertisement;
 import com.example.CMS.service.AppUserService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,14 @@ public class UsersController {
         modelCreator(model, user, true, "Something went wrong!!");
         return "appUser/appUsers.html";
 
+    }
+
+    @RequestMapping(value = "/users/delete/{id}", method={RequestMethod.DELETE, RequestMethod.GET})
+    public String delete(@PathVariable Long id, @ModelAttribute("user") AppUser user, Model model) {
+        appUserService.delete(id);
+        List<AppUser> appUsersList = appUserService.getUsers();
+        model.addAttribute("appUsersList", appUsersList);
+        return "appUser/appUsers.html";
     }
 
     private Model modelCreator(Model model, AppUser user, boolean error, String message) {
