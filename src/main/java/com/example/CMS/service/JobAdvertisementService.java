@@ -1,13 +1,10 @@
 package com.example.CMS.service;
 
-import com.example.CMS.model.AppUser;
 import com.example.CMS.repository.JobAdvertisementRepository;
 import com.example.CMS.model.JobAdvertisement;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 

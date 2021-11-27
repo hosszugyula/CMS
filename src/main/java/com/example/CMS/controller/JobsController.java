@@ -1,12 +1,8 @@
 package com.example.CMS.controller;
 
-import com.example.CMS.model.AppUser;
-import com.example.CMS.model.AppUserDetails;
 import com.example.CMS.model.JobAdvertisement;
-import com.example.CMS.repository.JobAdvertisementRepository;
 import com.example.CMS.service.JobAdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

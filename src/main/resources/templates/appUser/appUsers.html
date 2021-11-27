@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymleaf.org">
+      xmlns:th="http://www.thymleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -28,6 +28,14 @@
     </style>
 </head>
 <body>
+<script>
+function clicked(e)
+{
+    if(!confirm('Are you sure?')) {
+        e.preventDefault();
+    }
+}
+</script>
 <th:block th:include="/_menu"></th:block>
 
 <div th:if="${error} == true">
@@ -58,7 +66,7 @@
         <td class="user" th:text="${user.details?.birth_date}"></td>
         <td class="user" th:href="@{/users/{id}(id=${user.id})}"><a th:href="@{/users/{id}(id=${user.id})}">Link</a></td>
         <td class="user" th:href="@{/users/update/{id}(id=${user.id})}"><a th:href="@{/users/update/{id}(id=${user.id})}">Módosítás</a></td>
-        <td class="user" th:href="@{/users/delete/{id}(id=${user.id})}"><a th:href="@{/users/delete/{id}(id=${user.id})}">Törlés</a></td>
+        <td class="user" th:href="@{/users/delete/{id}(id=${user.id})}"><a th:href="@{/users/delete/{id}(id=${user.id})}" onclick="clicked(event)">Törlés</a></td>
     </tr>
     </tbody>
 </table>

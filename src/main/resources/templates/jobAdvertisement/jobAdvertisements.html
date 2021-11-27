@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymleaf.org">
+      xmlns:th="http://www.thymleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,7 +11,7 @@
                 grid-template-areas: "left right"; margin-left: auto; margin-right: auto;
                 border-radius: 15px;}
     .left {grid-area: left; margin-right: auto; margin-left: auto; width: 70%;}
-    .right {grid-are: right; width: 98%}
+    .right {grid-are: right; width: 98%;}
     form {text-align: left; box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
     padding: 20px; border-radius: 0 0 2px 2px; background-color: #FFF;}
     .tg { width: 100%; border-collapse: collapse; margin-left: auto; margin-right: auto; font-size: 0.9em; font-family: sans-serif;
@@ -25,6 +25,7 @@
     .tg .column {text-align: center;}
     input[type=text], input[type=submit], input[type=reset], textarea {padding: 15px 20px; margin: 8px 0;display: inline-block;
     border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
+    .table {margin-left: auto; margin-right: auto; width: 50vw;}
     </style>
 </head>
 <body>
@@ -47,7 +48,7 @@ function clicked(e)
          </span>
 </div>
 
-<div class="container">
+<div sec:authorize="hasRole('ROLE_ADMIN')" class="container">
     <div class="right">
 <h1>Álláshirdetések</h1>
 <table class="tg">
@@ -84,6 +85,28 @@ function clicked(e)
     <input type="submit" value="Hozzáadás">
     <input type="reset" value="Visszaállítás">
 </form>
+    </div>
+</div>
+
+<div sec:authorize="hasRole('ROLE_USER')" class="container2">
+    <div class="table">
+        <h1>Álláshirdetések</h1>
+        <table class="tg">
+            <thead>
+            <tr>
+                <th class="column">Munkakör XYZ</th>
+                <th class="column">XYZ KFT</th>
+                <th class="column"> Részletek </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="job : ${jobAdvertisementList}">
+                <td class="job" th:text="${job.Scope}"></td>
+                <td class="job" th:text="${job.Forwarder}"></td>
+                <td class="job" th:href="@{/jobs/{id}(id=${job.id})}"><a th:href="@{/jobs/{id}(id=${job.id})}">Link</a></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

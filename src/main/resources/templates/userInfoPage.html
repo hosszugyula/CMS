@@ -1,9 +1,11 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>User Info</title>
     <style th:inline="css">
-        body { background: #D1D1D1;text-align: center; }
+        body { background: #f0f0f5;text-align: center; font-family:Arial, sans-serif;}
+        .container {margin-top: 75px;text-align: center; box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+                    padding: 20px; border-radius: 0 0 2px 2px; background-color: #FFF; width: 50vw; height: 50vh; margin-left: auto; margin-right: auto;}
     </style>
 </head>
 <body>
@@ -11,13 +13,15 @@
 <th:block th:include="/_menu"></th:block>
 
 
-<h2>User Info Page</h2>
-<h3>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h3>
-<b>This is protected page!</b>
-
-<br/><br/>
-
-<div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+<div class="container">
+    <div class="icon">
+        <img th:src="@{/img/user-icon.png}">
+    </div>
+    <br/>
+    <h3>Üdvözöllek : <span th:utext="${#request.userPrincipal.name}"></span></h3>
+    <br/>
+    <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+</div>
 
 </body>
 

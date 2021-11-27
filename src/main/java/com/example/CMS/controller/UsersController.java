@@ -2,7 +2,6 @@ package com.example.CMS.controller;
 
 import com.example.CMS.model.AppUser;
 import com.example.CMS.model.AppUserDetails;
-import com.example.CMS.model.JobAdvertisement;
 import com.example.CMS.service.AppUserService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
