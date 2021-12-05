@@ -15,7 +15,7 @@ repositories {
 
 ext {
     lombokVersion = '1.18.22'
-    springbootVersion = '2.5.6'
+    springbootVersion = '2.6.1'
 }
 
 dependencies {
@@ -39,7 +39,7 @@ dependencies {
     testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
-    implementation 'com.h2database:h2:1.4.200'
+    implementation 'com.h2database:h2:2.0.202'
 
 
 
