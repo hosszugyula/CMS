@@ -23,8 +23,11 @@
     .tg tbody tr:last-of-type { border-bottom: 2px solid #009879;}
     .tg tbody tr.active-row { font-weight: bold; color: #009879;}
     .tg .column {text-align: center;}
+    table a {text-decoration: none; color: inherit;}
     input[type=text], input[type=checkbox], input[type=submit], input[type=reset], input[type=date], textarea {padding: 15px 20px;
            margin: 3px 0;display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
+    .button { width: 75px; height: 25px; background: #009879; padding: 5px; text-align: center; border-radius: 5px;
+              color: white; font-weight: bold; line-height: 25px;}
     </style>
 </head>
 <body>
@@ -64,9 +67,9 @@ function clicked(e)
         <td class="user" th:text="${user.details?.first_name}"></td>
         <td class="user" th:text="${user.details?.sur_name}"></td>
         <td class="user" th:text="${user.details?.birth_date}"></td>
-        <td class="user" th:href="@{/users/{id}(id=${user.id})}"><a th:href="@{/users/{id}(id=${user.id})}">Link</a></td>
-        <td class="user" th:href="@{/users/update/{id}(id=${user.id})}"><a th:href="@{/users/update/{id}(id=${user.id})}">Módosítás</a></td>
-        <td class="user" th:href="@{/users/delete/{id}(id=${user.id})}"><a th:href="@{/users/delete/{id}(id=${user.id})}" onclick="clicked(event)">Törlés</a></td>
+        <td class="user" th:href="@{/users/{id}(id=${user.id})}"><a class="button" th:href="@{/users/{id}(id=${user.id})}">Link</a></td>
+        <td class="user" th:href="@{/users/update/{id}(id=${user.id})}"><a class="button" th:href="@{/users/update/{id}(id=${user.id})}">Módosítás</a></td>
+        <td class="user" th:href="@{/users/delete/{id}(id=${user.id})}"><a class="button" th:href="@{/users/delete/{id}(id=${user.id})}" onclick="clicked(event)">Törlés</a></td>
     </tr>
     </tbody>
 </table>
