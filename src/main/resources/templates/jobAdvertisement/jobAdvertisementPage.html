@@ -6,35 +6,52 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style th:inline="css">
-    body {background: #D1D1D1; text-align: center; font-family:Arial, sans-serif}
-    .tg  {width: 500px; margin-top: 50px;border-collapse:collapse;border-spacing:0; margin-left:auto;margin-right:auto;}
-    .tg td{background: #839192;border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-    overflow:hidden;padding:8px 8px;word-break:normal;}
-    .tg th{background: #212121;border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-    font-weight:normal;overflow:hidden;padding:8px 8px;word-break:normal; color: #FDFEFE }
-    .tg .column{border-color:black;text-align:center;vertical-align:top}
-    .tg .job{text-align:left;vertical-align:center}
+        body {background: #D1D1D1; text-align: center; font-family:Arial, sans-serif}
+        .container {width: 50vw; height: 50vh;display: grid; grid-template-columns: 200px 400px;
+            grid-template-areas: "left right"; margin-left: auto; margin-right: auto;
+            margin-top: 100px; font-size: 27px; border: 15px solid darkgrey; border-radius: 15px;
+            background-color: #fff;}
+        .username { grid-area: uname; }
+        .birth-date { grid-area: bd; }
+        .introduction { grid-area: intro; }
+        .icon { grid-area: icon; }
+        .fullname { grid-area: fname;}
+        .left {background-color: rgb(31,196,202); display: grid; grid-template-rows: auto;
+            grid-template-areas: "icon" "fname";}
+        .right {text-align: left; margin-left: 100px; display: grid; grid-template-rows: 1fr 1fr 1fr;
+            grid-template-areas: "uname" "bd" "intro";}
+        img {}
+        .left .name {font-size: 27px;}
+        .right h3 {font-size: 27px;}
+        .right span {font-size: 21px;}
     </style>
 </head>
+
 <body>
 <th:block th:include="/_menu"></th:block>
 
-<h1>Job XYZ</h1>
-<table class="tg">
-    <thead>
-    <tr>
-        <th class="column">Munkakör XYZXYZ</th>
-        <th class="column">XYZ KFT</th>
-        <th class="column">Állás rövid leírása</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td class="job" th:text="${jobAdvertisement.Scope}"></td>
-        <td class="job" th:text="${jobAdvertisement.Forwarder}"></td>
-        <td class="job" th:text="${jobAdvertisement.content}"></td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <div class="left">
+        <div class="icon">
+            <img th:src="@{/img/briefcase-icon.jpg}">
+        </div>
+        <div class="fullname">
+            <span class="XYZ KFT" th:text="${jobAdvertisement.Scope}"></span>
+        </div>
+    </div>
+    <div class="right">
+        <div class="Felhasználónév">
+            <h3>Állás hirdetője:</h3>
+            <span th:text="${jobAdvertisement.Forwarder}"></span>
+        </div>
+        <div class="birth-date">
+            <h3>Leírás:</h3>
+            <span th:text="${jobAdvertisement.content}"></span>
+        </div>
+
+    </div>
+
+</div>
+
 </body>
 </html>
