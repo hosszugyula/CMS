@@ -7,19 +7,19 @@
     <title>Title</title>
     <style th:inline="css">
         body {background: #D1D1D1; text-align: center; font-family:Arial, sans-serif}
-        .container {width: 50vw; height: 50vh;display: grid; grid-template-columns: 200px 400px;
+        .container {width: 50vw; display: grid; grid-template-columns: 200px 650px;
             grid-template-areas: "left right"; margin-left: auto; margin-right: auto;
             margin-top: 100px; font-size: 27px; border: 15px solid darkgrey; border-radius: 15px;
             background-color: #fff;}
-        .username { grid-area: uname; }
-        .birth-date { grid-area: bd; }
+        .name { grid-area: name; }
+        .position { grid-area: pt; }
         .introduction { grid-area: intro; }
         .icon { grid-area: icon; }
-        .fullname { grid-area: fname;}
+        .cpname { grid-area: cpname;}
         .left {background-color: rgb(31,196,202); display: grid; grid-template-rows: auto;
-            grid-template-areas: "icon" "fname";}
-        .right {text-align: left; margin-left: 100px; display: grid; grid-template-rows: 1fr 1fr 1fr;
-            grid-template-areas: "uname" "bd" "intro";}
+            grid-template-areas: "icon" "cpname";}
+        .right {text-align: left; margin-left: 100px; display: grid; grid-template-rows: auto;
+            grid-template-areas: "name" "pt" "intro";}
         img {}
         .left .name {font-size: 27px;}
         .right h3 {font-size: 27px;}
@@ -35,16 +35,20 @@
         <div class="icon">
             <img th:src="@{/img/briefcase-icon.jpg}">
         </div>
-        <div class="fullname">
+        <div class="cpname">
             <span class="XYZ KFT" th:text="${jobAdvertisement.Scope}"></span>
         </div>
     </div>
     <div class="right">
-        <div class="Felhasználónév">
+        <div class="name">
             <h3>Állás hirdetője:</h3>
             <span th:text="${jobAdvertisement.Forwarder}"></span>
         </div>
-        <div class="birth-date">
+        <div class="position">
+            <h3>Betöltendő pozíció:</h3>
+            <span th:text="${jobAdvertisement.Scope}"></span>
+        </div>
+        <div class="introduction">
             <h3>Leírás:</h3>
             <span th:text="${jobAdvertisement.content}"></span>
         </div>

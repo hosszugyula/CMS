@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Hirdetések</title>
     <style th:inline="css">
     body {background: #D1D1D1; text-align: center; font-family:Arial, sans-serif}
     .container {display: grid; grid-template-columns: auto;
@@ -25,7 +25,11 @@
     .tg .column {text-align: center;}
     input[type=text], input[type=submit], input[type=reset], textarea {padding: 15px 20px; margin: 8px 0;display: inline-block;
     border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
+    table a {text-decoration: none; color: inherit;}
+    .button { width: 75px; height: 25px; background: #009879; padding: 5px; text-align: center; border-radius: 5px;
+              color: white; font-weight: bold; line-height: 25px;}
     .table {margin-left: auto; margin-right: auto; width: 50vw;}
+
     </style>
 </head>
 <body>
@@ -54,8 +58,8 @@ function clicked(e)
 <table class="tg">
     <thead>
     <tr>
-        <th class="column">Munkakör XYZ</th>
-        <th class="column">XYZ KFT</th>
+        <th class="column">Munkakör</th>
+        <th class="column">Cégnév</th>
         <th class="column"> Részletek </th>
         <th class="column">Módosítás</th>
         <th class="column">Törlés</th>
@@ -65,9 +69,9 @@ function clicked(e)
     <tr th:each="job : ${jobAdvertisementList}">
         <td class="job" th:text="${job.Scope}"></td>
         <td class="job" th:text="${job.Forwarder}"></td>
-        <td class="job" th:href="@{/jobs/{id}(id=${job.id})}"><a th:href="@{/jobs/{id}(id=${job.id})}">Link</a></td>
-        <td class="job" th:href="@{/jobs/update/{id}(id=${job.id})}"><a th:href="@{/jobs/update/{id}(id=${job.id})}">Módosítás</a></td>
-        <td class="job" th:href="@{/jobs/delete/{id}(id=${job.id})}"><a th:href="@{/jobs/delete/{id}(id=${job.id})}" onclick="clicked(event)">Törlés</a></td>
+        <td class="job" th:href="@{/jobs/{id}(id=${job.id})}"><a class="button" th:href="@{/jobs/{id}(id=${job.id})}">Link</a></td>
+        <td class="job" th:href="@{/jobs/update/{id}(id=${job.id})}"><a class="button" th:href="@{/jobs/update/{id}(id=${job.id})}">Módosítás</a></td>
+        <td class="job" th:href="@{/jobs/delete/{id}(id=${job.id})}"><a class="button" th:href="@{/jobs/delete/{id}(id=${job.id})}" onclick="clicked(event)">Törlés</a></td>
     </tr>
     </tbody>
 </table>
@@ -103,7 +107,7 @@ function clicked(e)
             <tr th:each="job : ${jobAdvertisementList}">
                 <td class="job" th:text="${job.Scope}"></td>
                 <td class="job" th:text="${job.Forwarder}"></td>
-                <td class="job" th:href="@{/jobs/{id}(id=${job.id})}"><a th:href="@{/jobs/{id}(id=${job.id})}">Link</a></td>
+                <td class="job" th:href="@{/jobs/{id}(id=${job.id})}"><a class="button" th:href="@{/jobs/{id}(id=${job.id})}">Link</a></td>
             </tr>
             </tbody>
         </table>
